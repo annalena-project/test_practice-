@@ -15,7 +15,7 @@ response = requests.get(URL, params=parameters, timeout=10)
 # params=parameters: The server uses them to know what to return.
 
 print(response.status_code)   # Prints the HTTP status code. It shows what response the server sent back (200, 400, 500)
-#print(response.json())        # Converts the server response to a Python dictionary and prints the data
+print(response.json())        # Converts the server response to a Python dictionary and prints the data
 
 data = response.json()        # Converts the server response from JSON format to a Python dictionary
 
@@ -31,7 +31,18 @@ longitude = first_result["longitude"]
 
 print("latitude:", latitude)   # Prints the latitude / longitude value
 print("longitude:", longitude)
-
-
+  
 # b. 
+
+FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
+
+forecast_parameters = {
+    "latitude": latitude,
+    "longitude": longitude,
+    "current_weather": True
+}
+
+forecast_response = requests.get(FORECAST_URL, params=forecast_parameters, timeout=10)
+
+forecast_data = forecast_response.json()
 
