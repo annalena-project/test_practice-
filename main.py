@@ -45,12 +45,10 @@ forecast_parameters = {
 forecast_response = requests.get(FORECAST_URL, params=forecast_parameters, timeout=10)
 
 forecast_data = forecast_response.json()
-
 print(forecast_response.status_code)
 
 # C
 
 print(forecast_data)
-
 
 
