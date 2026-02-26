@@ -1,7 +1,6 @@
 # a.
 
 import requests 
-import json
 
 URL = "https://geocoding-api.open-meteo.com/v1/search"
 
@@ -16,7 +15,7 @@ response = requests.get(URL, params=parameters, timeout=10)
 # params=parameters: The server uses them to know what to return.
 
 print(response.status_code)   # Prints the HTTP status code. It shows what response the server sent back (200, 400, 500)
-print(response.json())        # Converts the server response to a Python dictionary and prints the data
+
 
 data = response.json()        # Converts the server response from JSON format to a Python dictionary
 
@@ -46,8 +45,6 @@ forecast_response = requests.get(FORECAST_URL, params=forecast_parameters, timeo
 
 forecast_data = forecast_response.json()
 print(forecast_response.status_code)
-
-print(json.dumps(forecast_data, indent=2))
 
 # C
 
