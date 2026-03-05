@@ -22,7 +22,7 @@ def observation(observation_id):
 def edit_observation(observation_id):
     return f"Update observation {observation_id}"
 
-@app.route("/observations/<int:observation_id>/delete", methods=["POST"])
+@app.route("/observations/<int:observation_id>/delete", methods=["GET", "POST"])
 def delete_observation(observation_id):
     return f"Delete observation {observation_id}"
 
