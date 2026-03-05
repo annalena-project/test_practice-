@@ -1,37 +1,30 @@
-from flask import Flask, render_template, request
-import requests
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return "Weather Tracker Homepage!"
 
+@app.route("/ingest")
+def create_observation():
+    return "Create a new weather observation"
 
-@app.route("/weather")
-def weather():
-    city = request.args.get("city")
-    country = request.args.get("country")
+@app.route("/observations")
+def observations():
+    return "Retrieve all the observations"
 
-    # Geocoding
-    geo_url = "https://geocoding-api.open-meteo.com/v1/search"
-    geo_params = {
-        "name": city,
-        "country": country,
-        "count": 1
-    }
+@app.route("/observations/<int:observation_id>")
+def observation(observation_id):
+    return f"Retrieve observation {observation_id}"
 
-    geo_response = requests.get(geo_url, params=geo_params)
-    geo_data = geo_response.json()
+@app.route("/observations/<int:observation_id>/edit", methods=["GET", "POST"])
+def edit_observation(observation_id):
+    return f"Update observation {observation_id}"
 
-    result = geo_data["results"][0]
-    latitude = result["latitude"]
-    longitude = result["longitude"]
-
-    return f"{city}, {country} → lat={latitude}, lon={longitude}"
-
+@app.route("/observations/<int:observation_id>/delete", methods=["POST"])
+def delete_observation(observation_id):
+    return f"Delete observation {observation_id}"
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-    
